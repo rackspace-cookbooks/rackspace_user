@@ -12,8 +12,8 @@ user:          'user that needs to be the owner of the keys
 
 # Attributes
 
-node["rackspace-user"]["data_bag_name"] data_bag that contains user info
-node["rackspace-user"]["user" user 'id' to pull from data_bag.
+node["rackspace-user"]["data_bag_name"] data_bag that contains user info  
+node["rackspace-user"]["user"] user 'id' to pull from data_bag.
 
 
 # Recipes
