@@ -7,8 +7,8 @@
 # All rights reserved - Do Not Redistribute
 #
 
-data_bag_name = node['key-updater']['data_bag_name']
-id            = node['key-updater']['user']
+data_bag_name = node['rackspace-user']['data_bag_name']
+id            = node['rackspace-user']['user']
 
 keys = data_bag_item(data_bag_name, id)
 
