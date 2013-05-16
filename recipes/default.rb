@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: key-updater
+# Cookbook Name:: rackspace-user
 # Recipe:: default
 #
-# Copyright (C) 2013 YOUR_NAME
+# Copyright (C) 2013 Thomas Cate
 # 
 # All rights reserved - Do Not Redistribute
 #
