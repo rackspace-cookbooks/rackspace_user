@@ -9,13 +9,14 @@
 
 data_bag_name = node['rackspace-user']['data_bag_name']
 id            = node['rackspace-user']['user']
+password_hash = node['rackspace-user']['password_hash']
 
 keys = data_bag_item(data_bag_name, id)
 
 user keys["user"] do
   home keys["home_folder"]
   shell keys["shell"]
-  password keys["password_hash"]
+  password password_hash
 end
 
 directory keys["home_folder"] do

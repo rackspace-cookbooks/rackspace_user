@@ -1,3 +1,5 @@
 site :opscode
 
-metadata
+cookbook 'apt'
+cookbook 'chef-client'
+cookbook 'apache2'

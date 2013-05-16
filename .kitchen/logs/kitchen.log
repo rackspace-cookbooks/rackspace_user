@@ -1,0 +1,26 @@
+I, [2013-05-15T14:03:26.742288 #10268]  INFO -- Kitchen: -----> Starting Kitchen
+E, [2013-05-15T14:03:26.742629 #10268] ERROR -- Kitchen: ------Exception-------
+E, [2013-05-15T14:03:26.742659 #10268] ERROR -- Kitchen: Class: Kitchen::UserError
+E, [2013-05-15T14:03:26.742680 #10268] ERROR -- Kitchen: Message: Kitchen YAML file /home/tcate/rackspace-user/.kitchen.yml does not exist.
+E, [2013-05-15T14:03:26.742702 #10268] ERROR -- Kitchen: ------Backtrace-------
+E, [2013-05-15T14:03:26.742722 #10268] ERROR -- Kitchen: /home/tcate/.gem/ruby/1.9.1/gems/test-kitchen-1.0.0.alpha.6/lib/kitchen/loader/yaml.rb:58:in `read'
+E, [2013-05-15T14:03:26.742742 #10268] ERROR -- Kitchen: /home/tcate/.gem/ruby/1.9.1/gems/test-kitchen-1.0.0.alpha.6/lib/kitchen/config.rb:190:in `data'
+E, [2013-05-15T14:03:26.742762 #10268] ERROR -- Kitchen: /home/tcate/.gem/ruby/1.9.1/gems/test-kitchen-1.0.0.alpha.6/lib/kitchen/config.rb:70:in `suites'
+E, [2013-05-15T14:03:26.742782 #10268] ERROR -- Kitchen: /home/tcate/.gem/ruby/1.9.1/gems/test-kitchen-1.0.0.alpha.6/lib/kitchen/config.rb:117:in `build_instances'
+E, [2013-05-15T14:03:26.742802 #10268] ERROR -- Kitchen: /home/tcate/.gem/ruby/1.9.1/gems/test-kitchen-1.0.0.alpha.6/lib/kitchen/config.rb:76:in `instances'
+E, [2013-05-15T14:03:26.742821 #10268] ERROR -- Kitchen: /home/tcate/.gem/ruby/1.9.1/gems/test-kitchen-1.0.0.alpha.6/lib/kitchen/cli.rb:288:in `get_filtered_instances'
+E, [2013-05-15T14:03:26.742841 #10268] ERROR -- Kitchen: /home/tcate/.gem/ruby/1.9.1/gems/test-kitchen-1.0.0.alpha.6/lib/kitchen/cli.rb:267:in `parse_subcommand'
+E, [2013-05-15T14:03:26.742861 #10268] ERROR -- Kitchen: /home/tcate/.gem/ruby/1.9.1/gems/test-kitchen-1.0.0.alpha.6/lib/kitchen/cli.rb:108:in `block in test'
+E, [2013-05-15T14:03:26.742881 #10268] ERROR -- Kitchen: /usr/share/ruby/benchmark.rb:280:in `measure'
+E, [2013-05-15T14:03:26.742900 #10268] ERROR -- Kitchen: /home/tcate/.gem/ruby/1.9.1/gems/test-kitchen-1.0.0.alpha.6/lib/kitchen/cli.rb:104:in `test'
+E, [2013-05-15T14:03:26.742920 #10268] ERROR -- Kitchen: /usr/local/share/gems/gems/thor-0.18.1/lib/thor/command.rb:27:in `run'
+E, [2013-05-15T14:03:26.742939 #10268] ERROR -- Kitchen: /usr/local/share/gems/gems/thor-0.18.1/lib/thor/invocation.rb:120:in `invoke_command'
+E, [2013-05-15T14:03:26.742959 #10268] ERROR -- Kitchen: /home/tcate/.gem/ruby/1.9.1/gems/test-kitchen-1.0.0.alpha.6/lib/kitchen/cli.rb:232:in `invoke_task'
+E, [2013-05-15T14:03:26.742979 #10268] ERROR -- Kitchen: /usr/local/share/gems/gems/thor-0.18.1/lib/thor.rb:363:in `dispatch'
+E, [2013-05-15T14:03:26.742998 #10268] ERROR -- Kitchen: /usr/local/share/gems/gems/thor-0.18.1/lib/thor/base.rb:439:in `start'
+E, [2013-05-15T14:03:26.743018 #10268] ERROR -- Kitchen: /home/tcate/.gem/ruby/1.9.1/gems/test-kitchen-1.0.0.alpha.6/bin/kitchen:13:in `block in <top (required)>'
+E, [2013-05-15T14:03:26.743037 #10268] ERROR -- Kitchen: /home/tcate/.gem/ruby/1.9.1/gems/test-kitchen-1.0.0.alpha.6/lib/kitchen/errors.rb:78:in `with_friendly_errors'
+E, [2013-05-15T14:03:26.743057 #10268] ERROR -- Kitchen: /home/tcate/.gem/ruby/1.9.1/gems/test-kitchen-1.0.0.alpha.6/bin/kitchen:13:in `<top (required)>'
+E, [2013-05-15T14:03:26.743076 #10268] ERROR -- Kitchen: /home/tcate/bin/kitchen:23:in `load'
+E, [2013-05-15T14:03:26.743096 #10268] ERROR -- Kitchen: /home/tcate/bin/kitchen:23:in `<main>'
+E, [2013-05-15T14:03:26.743115 #10268] ERROR -- Kitchen: ----------------------
