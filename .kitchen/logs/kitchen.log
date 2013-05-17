@@ -24,3 +24,61 @@ E, [2013-05-15T14:03:26.743057 #10268] ERROR -- Kitchen: /home/tcate/.gem/ruby/1
 E, [2013-05-15T14:03:26.743076 #10268] ERROR -- Kitchen: /home/tcate/bin/kitchen:23:in `load'
 E, [2013-05-15T14:03:26.743096 #10268] ERROR -- Kitchen: /home/tcate/bin/kitchen:23:in `<main>'
 E, [2013-05-15T14:03:26.743115 #10268] ERROR -- Kitchen: ----------------------
+I, [2013-05-17T10:02:41.669312 #31743]  INFO -- Kitchen: -----> Starting Kitchen
+I, [2013-05-17T10:02:47.173526 #31743]  INFO -- Kitchen: -----> Cleaning up any prior instances of <default-ubuntu-1204>
+I, [2013-05-17T10:02:47.174147 #31743]  INFO -- Kitchen: -----> Destroying <default-ubuntu-1204>
+I, [2013-05-17T10:02:47.178829 #31743]  INFO -- Kitchen: -----> Testing <default-ubuntu-1204>
+I, [2013-05-17T10:02:47.179166 #31743]  INFO -- Kitchen: -----> Creating <default-ubuntu-1204>
+E, [2013-05-17T10:03:18.578907 #31743] ERROR -- Kitchen: ------Exception-------
+E, [2013-05-17T10:03:18.578970 #31743] ERROR -- Kitchen: Class: Kitchen::ActionFailed
+E, [2013-05-17T10:03:18.579010 #31743] ERROR -- Kitchen: Message: Failed to complete #create action: [exit]
+E, [2013-05-17T10:03:18.579055 #31743] ERROR -- Kitchen: ---Nested Exception---
+E, [2013-05-17T10:03:18.579095 #31743] ERROR -- Kitchen: Class: SystemExit
+E, [2013-05-17T10:03:18.579128 #31743] ERROR -- Kitchen: Message: exit
+E, [2013-05-17T10:03:18.579164 #31743] ERROR -- Kitchen: ------Backtrace-------
+E, [2013-05-17T10:03:18.579203 #31743] ERROR -- Kitchen: /home/tcate/.gem/ruby/1.9.1/bundler/gems/test-kitchen-1dc4a6681e28/lib/kitchen/instance.rb:273:in `action'
+E, [2013-05-17T10:03:18.579241 #31743] ERROR -- Kitchen: /home/tcate/.gem/ruby/1.9.1/bundler/gems/test-kitchen-1dc4a6681e28/lib/kitchen/instance.rb:249:in `perform_action'
+E, [2013-05-17T10:03:18.579277 #31743] ERROR -- Kitchen: /home/tcate/.gem/ruby/1.9.1/bundler/gems/test-kitchen-1dc4a6681e28/lib/kitchen/instance.rb:228:in `create_action'
+E, [2013-05-17T10:03:18.579312 #31743] ERROR -- Kitchen: /home/tcate/.gem/ruby/1.9.1/bundler/gems/test-kitchen-1dc4a6681e28/lib/kitchen/instance.rb:222:in `block in transition_to'
+E, [2013-05-17T10:03:18.579347 #31743] ERROR -- Kitchen: /home/tcate/.gem/ruby/1.9.1/bundler/gems/test-kitchen-1dc4a6681e28/lib/kitchen/instance.rb:221:in `each'
+E, [2013-05-17T10:03:18.579394 #31743] ERROR -- Kitchen: /home/tcate/.gem/ruby/1.9.1/bundler/gems/test-kitchen-1dc4a6681e28/lib/kitchen/instance.rb:221:in `transition_to'
+E, [2013-05-17T10:03:18.579432 #31743] ERROR -- Kitchen: /home/tcate/.gem/ruby/1.9.1/bundler/gems/test-kitchen-1dc4a6681e28/lib/kitchen/instance.rb:143:in `verify'
+E, [2013-05-17T10:03:18.579470 #31743] ERROR -- Kitchen: /home/tcate/.gem/ruby/1.9.1/bundler/gems/test-kitchen-1dc4a6681e28/lib/kitchen/instance.rb:172:in `block in test'
+E, [2013-05-17T10:03:18.579507 #31743] ERROR -- Kitchen: /usr/share/ruby/benchmark.rb:280:in `measure'
+E, [2013-05-17T10:03:18.579545 #31743] ERROR -- Kitchen: /home/tcate/.gem/ruby/1.9.1/bundler/gems/test-kitchen-1dc4a6681e28/lib/kitchen/instance.rb:168:in `test'
+E, [2013-05-17T10:03:18.579584 #31743] ERROR -- Kitchen: /home/tcate/.gem/ruby/1.9.1/bundler/gems/test-kitchen-1dc4a6681e28/lib/kitchen/cli.rb:258:in `public_send'
+E, [2013-05-17T10:03:18.579624 #31743] ERROR -- Kitchen: /home/tcate/.gem/ruby/1.9.1/bundler/gems/test-kitchen-1dc4a6681e28/lib/kitchen/cli.rb:258:in `block in run_serial'
+E, [2013-05-17T10:03:18.579663 #31743] ERROR -- Kitchen: /home/tcate/.gem/ruby/1.9.1/bundler/gems/test-kitchen-1dc4a6681e28/lib/kitchen/cli.rb:258:in `map'
+E, [2013-05-17T10:03:18.579702 #31743] ERROR -- Kitchen: /home/tcate/.gem/ruby/1.9.1/bundler/gems/test-kitchen-1dc4a6681e28/lib/kitchen/cli.rb:258:in `run_serial'
+E, [2013-05-17T10:03:18.579742 #31743] ERROR -- Kitchen: /home/tcate/.gem/ruby/1.9.1/bundler/gems/test-kitchen-1dc4a6681e28/lib/kitchen/cli.rb:113:in `block in test'
+E, [2013-05-17T10:03:18.579781 #31743] ERROR -- Kitchen: /usr/share/ruby/benchmark.rb:280:in `measure'
+E, [2013-05-17T10:03:18.579820 #31743] ERROR -- Kitchen: /home/tcate/.gem/ruby/1.9.1/bundler/gems/test-kitchen-1dc4a6681e28/lib/kitchen/cli.rb:104:in `test'
+E, [2013-05-17T10:03:18.579858 #31743] ERROR -- Kitchen: /usr/local/share/gems/gems/thor-0.18.1/lib/thor/command.rb:27:in `run'
+E, [2013-05-17T10:03:18.579894 #31743] ERROR -- Kitchen: /usr/local/share/gems/gems/thor-0.18.1/lib/thor/invocation.rb:120:in `invoke_command'
+E, [2013-05-17T10:03:18.579928 #31743] ERROR -- Kitchen: /home/tcate/.gem/ruby/1.9.1/bundler/gems/test-kitchen-1dc4a6681e28/lib/kitchen/cli.rb:232:in `invoke_task'
+E, [2013-05-17T10:03:18.579965 #31743] ERROR -- Kitchen: /usr/local/share/gems/gems/thor-0.18.1/lib/thor.rb:363:in `dispatch'
+E, [2013-05-17T10:03:18.580004 #31743] ERROR -- Kitchen: /usr/local/share/gems/gems/thor-0.18.1/lib/thor/base.rb:439:in `start'
+E, [2013-05-17T10:03:18.580042 #31743] ERROR -- Kitchen: /home/tcate/.gem/ruby/1.9.1/bundler/gems/test-kitchen-1dc4a6681e28/bin/kitchen:13:in `block in <top (required)>'
+E, [2013-05-17T10:03:18.580077 #31743] ERROR -- Kitchen: /home/tcate/.gem/ruby/1.9.1/bundler/gems/test-kitchen-1dc4a6681e28/lib/kitchen/errors.rb:78:in `with_friendly_errors'
+E, [2013-05-17T10:03:18.580124 #31743] ERROR -- Kitchen: /home/tcate/.gem/ruby/1.9.1/bundler/gems/test-kitchen-1dc4a6681e28/bin/kitchen:13:in `<top (required)>'
+E, [2013-05-17T10:03:18.580163 #31743] ERROR -- Kitchen: /home/tcate/.gem/ruby/1.9.1/bin/kitchen:23:in `load'
+E, [2013-05-17T10:03:18.580200 #31743] ERROR -- Kitchen: /home/tcate/.gem/ruby/1.9.1/bin/kitchen:23:in `<main>'
+E, [2013-05-17T10:03:18.580235 #31743] ERROR -- Kitchen: ----------------------
+I, [2013-05-17T10:11:23.061548 #32187]  INFO -- Kitchen: -----> Starting Kitchen
+E, [2013-05-17T10:11:23.063168 #32187] ERROR -- Kitchen: 
+No instances for regex `', try running `kitchen list'
+
+
+I, [2013-05-17T10:12:06.692492 #32209]  INFO -- Kitchen: -----> Starting Kitchen
+E, [2013-05-17T10:12:06.693842 #32209] ERROR -- Kitchen: 
+No instances for regex `', try running `kitchen list'
+
+
+E, [2013-05-17T10:12:11.551794 #32225] ERROR -- Kitchen: 
+No instances for regex `', try running `kitchen list'
+
+
+E, [2013-05-17T10:12:16.161839 #32231] ERROR -- Kitchen: 
+No instances defined
+
+

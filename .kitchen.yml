@@ -1,16 +1,31 @@
-driver_plugin: vagrant-openstack
+---
+driver_plugin: openstack
+
 platforms:
 - name: ubuntu-12.04
   driver_config:
-    box: canonical-ubuntu-12.04
-    box_url: http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box
-    require_chef_omnibus: 11.4.4
-  run_list:
-  - recipe[apt]
-
+    openstack_username: admin
+    openstack_api_key: 0p3nst@ck
+    openstack_auth_url: http://10.240.0.10:5000/v2.0/
+    require_chef_omnibus: latest
+    image_ref: 3bd6d72a-6851-4285-82fe-80bfb4fb53cc 
+    flavor_ref: 1
+- name: centos-5.3
+  driver_config:
+    openstack_username: admin
+    openstack_api_key: 0p3nst@ck
+    openstack_auth_url: http://10.240.0.10:5000/v2.0/
+    require_chef_omnibus: latest
+    image_ref: d04283e0-f9cc-4339-b794-78c7ffebc0d7
+    flavor_ref: 1
 suites:
-- name: default
+- name: rackspace-user
   run_list:
-  - recipe[minitest-handler]
-  - recipe[bluepill_test]
-  attributes: {bluepill: { bin: "/opt/chef/embedded/bin/bluepill" } }
+  - recipe[rackspace-user]
+  attrbutes:
+    data_bag_name:
+      - keys
+    password_hash:
+      - $6$80zp1wddO5pTaGHU$Q55OVyymFue2sS1OruznrDkoXu/QLl8p3R3ki24ktl52x90blodxqPldo3o8B5PHfBppJTmyEh2ljTJrjdO/M/
+    user:
+      - rack
