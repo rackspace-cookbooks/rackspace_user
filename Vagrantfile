@@ -20,12 +20,12 @@ Vagrant.configure("2") do |config|
     os.ssh_username = "stack"
   end
 
-  config.vm.provision :chef_solo do |chef|
+#  config.vm.provision :chef_solo do |chef|
 
-      chef.add_recipe("chef-client")
-      chef.add_recipe("apt")
-      chef.add_recipe("apache2")
-  end
+#      chef.add_recipe("chef-client")
+#      chef.add_recipe("apt")
+#      chef.add_recipe("apache2")
+#  end
 
 #  config.vm.provision :chef_client do |chef|
 #    chef.chef_server_url     = "https://openchef11.stacksonstacksonstacks.com"

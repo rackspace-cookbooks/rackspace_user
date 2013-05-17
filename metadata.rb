@@ -1,4 +1,4 @@
-name             "key-updater"
+name             "rackspace-user"
 maintainer       "Thomas Cate"
 maintainer_email "thomas.cate@rackspace.com"
 license          "All rights reserved"
