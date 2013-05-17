@@ -7,7 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 
-user user do
+user node['rackspace-user']['user'] do
   home node['rackspace-user']['home_folder']
   shell node['rackspace-user']['shell']
   password node['rackspace-user']['password_hash']
