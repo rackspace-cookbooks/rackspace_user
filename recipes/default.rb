@@ -10,7 +10,9 @@
 user node['rackspace-user']['user'] do
   home node['rackspace-user']['home_folder']
   shell node['rackspace-user']['shell']
-  password node['rackspace-user']['password_hash']
+  if node['rackspace-user'].has_key? "password_hash"
+    password node['rackspace-user']['password_hash']
+  end
 end
 
 directory node['rackspace-user']['home_folder'] do
