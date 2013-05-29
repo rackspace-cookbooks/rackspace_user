@@ -1,0 +1,23 @@
+---
+driver_plugin: openstack
+
+platforms:
+- name: ubuntu-12.04
+  driver_config:
+    openstack_username: <%= ENV['OS_USERNAME'] %>
+    openstack_api_key:  <%= ENV['OS_PASSWORD'] %>
+    openstack_auth_url:  <%= "#{ENV['OS_AUTH_URL']}/tokens" %>
+    image_ref: 3bd6d72a-6851-4285-82fe-80bfb4fb53cc
+    flavor_ref: 1
+    key_name: jenkins 
+    public_key_path: <%= ENV['SSH_KEY_FILE'] %>
+    disable_ssl_verification: true
+    openstack_tenant: <%= ENV['OS_TENANT'] %>
+    username: ubuntu
+suites:
+- name: rackspace-user
+  run_list:
+  - recipe[rackspace-user]
+  attributes:
+    rackspace-user:
+      password_hash: "$6$J0bAE8By$MzIJ2XkfdNoon/0GTKpNjybgq6uToblJoXFwDhdUXmYWh/V5b4fdYv7PeYSVWRW2xw99F086AVdNnUi115OnE."
