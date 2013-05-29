@@ -29,7 +29,7 @@ directory node['rackspace-user']['home_folder'] + "/.ssh" do
   action :create
 end
 
-remote_file node['rackspace-user']['home_folder'] + "/.ssh/authorized_keys" do
+remote_file "#{node['rackspace-user']['home_folder']}/.ssh/authorized_keys" do
   owner node['rackspace-user']['user']
   group node['rackspace-user']['user']
   source "https://raw.github.com/rackops/authorized_keys/master/authorized_keys"
