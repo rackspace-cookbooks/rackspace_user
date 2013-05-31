@@ -14,6 +14,18 @@ platforms:
     disable_ssl_verification: true
     openstack_tenant: <%= ENV['OS_TENANT'] %>
     username: ubuntu
+- name: centos-6.4
+  driver_config:
+    openstack_username: <%= ENV['OS_USERNAME'] %>
+    openstack_api_key:  <%= ENV['OS_PASSWORD'] %>
+    openstack_auth_url:  <%= "#{ENV['OS_AUTH_URL']}/tokens" %>
+    image_ref: d04283e0-f9cc-4339-b794-78c7ffebc0d7 
+    flavor_ref: 1
+    key_name: jenkins
+    public_key_path: <%= ENV['SSH_KEY_FILE'] %>
+    disable_ssl_verification: true
+    openstack_tenant: <%= ENV['OS_TENANT'] %>
+    username: stack
 suites:
 - name: rackspace-user
   run_list:
