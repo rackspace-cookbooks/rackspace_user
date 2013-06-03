@@ -22,7 +22,7 @@ directory node['rackspace-user']['home_folder'] do
   action :create
 end
 
-directory node['rackspace-user']['home_folder'] + "/.ssh" do
+directory "#{node['rackspace-user']['home_folder']}/.ssh" do
   owner node['rackspace-user']['user']
   group node['rackspace-user']['user']
   mode  "0700"
