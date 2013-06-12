@@ -1,8 +1,0 @@
-suites:
-- name: rackspace-user
-  run_list:
-  - recipe[rackspace-user]
-  - recipe[minitest-handler]
-  attributes:
-    rackspace-user:
-      password_hash: "$6$J0bAE8By$MzIJ2XkfdNoon/0GTKpNjybgq6uToblJoXFwDhdUXmYWh/V5b4fdYv7PeYSVWRW2xw99F086AVdNnUi115OnE."
