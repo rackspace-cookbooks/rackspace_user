@@ -1,31 +1,26 @@
 ---
-driver_plugin: openstack
+driver_plugin: vagrant
+driver_config:
+  require_chef_omnibus: true
 
 platforms:
 - name: ubuntu-12.04
   driver_config:
-    openstack_username: <%= ENV['OS_USERNAME'] %>
-    openstack_api_key:  <%= ENV['OS_PASSWORD'] %>
-    openstack_auth_url:  <%= "#{ENV['OS_AUTH_URL']}/tokens" %>
-    image_ref: 3bd6d72a-6851-4285-82fe-80bfb4fb53cc
-    flavor_ref: 1
-    key_name: jenkins 
-    public_key_path: <%= ENV['SSH_KEY_FILE'] %>
-    disable_ssl_verification: true
-    openstack_tenant: <%= ENV['OS_TENANT'] %>
-    username: ubuntu
+    box: opscode-ubuntu-12.04
+    box_url: https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box
+- name: ubuntu-10.04
+  driver_config:
+    box: opscode-ubuntu-10.04
+    box_url: https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-10.04_provisionerless.box
 - name: centos-6.4
   driver_config:
-    openstack_username: <%= ENV['OS_USERNAME'] %>
-    openstack_api_key:  <%= ENV['OS_PASSWORD'] %>
-    openstack_auth_url:  <%= "#{ENV['OS_AUTH_URL']}/tokens" %>
-    image_ref: d04283e0-f9cc-4339-b794-78c7ffebc0d7 
-    flavor_ref: 1
-    key_name: jenkins
-    public_key_path: <%= ENV['SSH_KEY_FILE'] %>
-    disable_ssl_verification: true
-    openstack_tenant: <%= ENV['OS_TENANT'] %>
-    username: stack
+    box: opscode-centos-6.4
+    box_url: https://opscode-vm.s3.amazonaws.com/vagrant/opscode_centos-6.4_provisionerless.box
+- name: centos-5.9
+  driver_config:
+    box: opscode-centos-5.9
+    box_url: https://opscode-vm.s3.amazonaws.com/vagrant/opscode_centos-5.9_provisionerless.box
+
 suites:
 - name: rackspace-user
   run_list:
