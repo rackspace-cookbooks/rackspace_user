@@ -11,11 +11,11 @@ By default this will make a passwordless ssh user named rack using the ssh keys 
 
 # Attributes
 
-node["rackspace-user"]["user"] user to create
-node["rackspace-user"]["password_hash"] password hash for user.  
-node["rackspace-user"]["remote_file"] remote file that contains ssh keys 
-default["rackspace-user"]["shell"] users shell
-default["rackspace-user"]["home_folder"] users home folder 
+node["rackspace-user"]["user"] user to create  
+node["rackspace-user"]["password_hash"] password hash for user.   
+node["rackspace-user"]["remote_file"] remote file that contains ssh keys  
+node["rackspace-user"]["shell"] users shell  
+node["rackspace-user"]["home_folder"] users home folder  
 
 # Recipes
 
