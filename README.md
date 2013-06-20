@@ -1,24 +1,21 @@
 # rackspace-user cookbook
-This cookbook checks a databag defined by node["rackspace-user"]["data_bag_name"] and creates a users and updates their authorized keys file based on this information.
+This cookbook creates a `rack` user and updates the authorized_keys file.
 
 # Requirements
 No other cookbooks are required for the base role, minitest-handler is recommended to execute the tests in ./files/default/tests/minitest/
 
 # Usage
-
-By default this will make a passwordless ssh user named rack using the ssh keys from https://raw.github.com/rackops/authorized_keys/master/authorized_keys. All of this can be modified through attributes
+By default this will make a passwordless ssh user named rack using the ssh keys from a remote file. All of this can be modified through attributes.
 
 
 # Attributes
 
 node["rackspace-user"]["user"] user to create  
-node["rackspace-user"]["password_hash"] password hash for user.   
 node["rackspace-user"]["remote_file"] remote file that contains ssh keys  
 node["rackspace-user"]["shell"] users shell  
 node["rackspace-user"]["home_folder"] users home folder  
 
 # Recipes
-
 default.rb, creates user and pulls in key file
 
 # License and Authors
