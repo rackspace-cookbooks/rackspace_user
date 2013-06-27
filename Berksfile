@@ -1,4 +1,7 @@
 site :opscode
 
-cookbook 'rackspace-user', path: "." 
-cookbook 'minitest-handler'
+metadata
+
+group :integration do
+	cookbook "minitest-handler"
+end
