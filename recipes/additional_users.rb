@@ -32,6 +32,7 @@ node['rackspace']['users'].each do |user, data|
        	mode "0700"
        	action :create
       end
+      
       unless node['rackspace']['users']["#{user}"]['authorized_keys'].nil?
         directory node['rackspace']['users']["#{user}"]['home'] + "/.ssh" do
          	owner "#{user}"
@@ -49,7 +50,7 @@ node['rackspace']['users'].each do |user, data|
             :keys => node['rackspace']['users']["#{user}"]['authorized_keys']
             })
         end
-        
+
       end
     end
 

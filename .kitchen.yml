@@ -29,3 +29,17 @@ suites:
   attributes:
     rackspace-user:
       password_hash: "$6$J0bAE8By$MzIJ2XkfdNoon/0GTKpNjybgq6uToblJoXFwDhdUXmYWh/V5b4fdYv7PeYSVWRW2xw99F086AVdNnUi115OnE."
+
+- name: additional_users
+  run_list:
+  - recipe[rackspace-user::additional_users]
+  attributes:
+    rackspace:
+      users:
+        test_user1:
+          password: "$6$J0bAE8By$MzIJ2XkfdNoon/0GTKpNjybgq6uToblJoXFwDhdUXmYWh/V5b4fdYv7PeYSVWRW2xw99F086AVdNnUi115OnE."
+          note: "Test User 1"
+          home: "/home/test_user1"
+          shell: "/bin/bash"
+          authorized_keys:
+           ["ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAIEAtzhEm/e1iABdN/Ciba49/cCJ8w8S18x/U6DMXruV3Vlc99+LNJlgRfTg+dNxAN8dxv/cfhQzOWMj9uM3TPHU/iq323CCCrM+SA0aESzuuYoXDmfV0urq9bBdmJFq0KcfECM6Hzu2Bm8kaUkPwZjE3n4QAuw9P+SE3y6WDXeq+EM= trevor"]
