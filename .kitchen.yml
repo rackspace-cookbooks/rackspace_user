@@ -41,5 +41,6 @@ suites:
           note: "Test User 1"
           home: "/home/test_user1"
           shell: "/bin/bash"
+          enabled: true
           authorized_keys:
            ["ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAIEAtzhEm/e1iABdN/Ciba49/cCJ8w8S18x/U6DMXruV3Vlc99+LNJlgRfTg+dNxAN8dxv/cfhQzOWMj9uM3TPHU/iq323CCCrM+SA0aESzuuYoXDmfV0urq9bBdmJFq0KcfECM6Hzu2Bm8kaUkPwZjE3n4QAuw9P+SE3y6WDXeq+EM= trevor"]

@@ -9,21 +9,23 @@
 
 node['rackspace']['users'].each do |user, data|
 
-  user "#{user}" do
-    unless node['rackspace']['users']["#{user}"]['uid'].nil?
-      uid node['rackspace']['users']["#{user}"]['uid']
+  unless node['rackspace']['users']["#{user}"] == false
+
+    user "#{user}" do
+      unless node['rackspace']['users']["#{user}"]['uid'].nil?
+        uid node['rackspace']['users']["#{user}"]['uid']
+      end
+
+      unless node['rackspace']['users']["#{user}"]['password'].nil?
+        password node['rackspace']['users']["#{user}"]['password']
+      end
+
+      shell node['rackspace']['users']["#{user}"]['shell']
+      home node['rackspace']['users']["#{user}"]['home']
+      comment node['rackspace']['users']["#{user}"]['note']
+
+    	action :create
     end
-
-    unless node['rackspace']['users']["#{user}"]['password'].nil?
-      password node['rackspace']['users']["#{user}"]['password']
-    end
-
-    shell node['rackspace']['users']["#{user}"]['shell']
-    home node['rackspace']['users']["#{user}"]['home']
-    comment node['rackspace']['users']["#{user}"]['note']
-
-  	action :create
-  end
 
     unless node['rackspace']['users']["#{user}"]['home'].nil?
       directory node['rackspace']['users']["#{user}"]['home'] do
@@ -49,9 +51,10 @@ node['rackspace']['users'].each do |user, data|
           variables ({
             :keys => node['rackspace']['users']["#{user}"]['authorized_keys']
             })
-        end
-
-      end
+        end          
+      end        
     end
+
+  end
 
 end
