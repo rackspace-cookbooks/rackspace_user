@@ -9,7 +9,7 @@
 
 node['rackspace']['users'].each do |user, data|
 
-  unless node['rackspace']['users']["#{user}"] == false
+  unless node['rackspace']['users']["#{user}"]['enabled'] == false
 
     user "#{user}" do
       unless node['rackspace']['users']["#{user}"]['uid'].nil?
