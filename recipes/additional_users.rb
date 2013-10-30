@@ -55,7 +55,18 @@ node['rackspace']['users'].each do |user, data|
         end          
       end        
     end
+    
+    if node['rackspace']['users']["#{user}"]['sudo'] == true
+
+      sudo "#{user}" do
+        user "#{user}"
+        nopasswd true
+      end
+
+    end
 
   end
 
 end
+
+include_recipe "sudo"
