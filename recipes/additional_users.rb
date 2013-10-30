@@ -55,7 +55,22 @@ node['rackspace']['users'].each do |user, data|
         end          
       end        
     end
+    
+    if node['rackspace']['users']["#{user}"]['sudo'] == "passwordless" || "password"
+
+      user "#{user}" do
+        node.override['authorization']['sudo']['users'] = ["#{user}"]
+      end
+      
+      if node['rackspace']['users']["#{user}"]['sudo'] == "passwordless" 
+        node.override['authorization']['sudo']['passwordless'] = ["#{user}"]
+      end
+
+    end
+
 
   end
 
 end
+
+include_recipe "sudo"
