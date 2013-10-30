@@ -33,8 +33,6 @@ The additional_users recipe allows you to create regular users based off of a da
 
 
     node["rackspace"]["users"] hash of users, keys are usernames.
-
-Under this you have,
     enabled: Boolean true/false, determines if the user is actually created.
     sudo: passwordless, nil. If passwordless user will be set up with passwordless sudo. If else they will be created with regular sudo access.
     password: This takes a password hash for the users login.
