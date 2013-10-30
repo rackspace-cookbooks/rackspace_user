@@ -56,18 +56,14 @@ node['rackspace']['users'].each do |user, data|
       end        
     end
     
-    if node['rackspace']['users']["#{user}"]['sudo'] == "passwordless" || "password"
+    if node['rackspace']['users']["#{user}"]['sudo'] == true
 
-      user "#{user}" do
-        node.override['authorization']['sudo']['users'] = ["#{user}"]
-      end
-      
-      if node['rackspace']['users']["#{user}"]['sudo'] == "passwordless" 
-        node.override['authorization']['sudo']['passwordless'] = ["#{user}"]
+      sudo "#{user}" do
+        user "#{user}"
+        nopasswd true
       end
 
     end
-
 
   end
 
