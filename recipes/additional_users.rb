@@ -23,11 +23,12 @@ node['rackspace']['users'].each do |user, data|
       shell node['rackspace']['users']["#{user}"]['shell']
       home node['rackspace']['users']["#{user}"]['home']
       comment node['rackspace']['users']["#{user}"]['note']
+      supports :manage_home=>false
 
     	action :create
     end
 
-    unless node['rackspace']['users']["#{user}"]['home'].nil?
+    if node['rackspace']['users']["#{user}"]['manage_home'] == true
       directory node['rackspace']['users']["#{user}"]['home'] do
        	owner "#{user}"
        	group "#{user}"

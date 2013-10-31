@@ -33,7 +33,8 @@ The additional_users recipe allows you to create regular users based off of a da
 
 
     node["rackspace"]["users"] hash of users, keys are usernames.
-    enabled: Boolean true/false, determines if the user is actually created.
+    enabled: Boolean true/false, determines if the user is actually created.  
+    manage_home: Boolean true/false, determines if the home directory is created.  
     sudo: Boolean true/false, determines if they get sudo access.
     password: This takes a password hash for the users login.
     note: This fills the user comment field.
