@@ -25,12 +25,14 @@ node['rackspace']['users'].each do |user, data|
       action :create
     end
 
-    node['rackspace']['users']["#{user}"]['groups'].each do |supp_group|
-      Chef::Log.info("Trying to add group: " + supp_group)
-      group supp_group do
-        action :create
-        members "#{user}"
-        append true
+    unless node['rackspace']['users']["#{user}"]['groups'].nil?
+      node['rackspace']['users']["#{user}"]['groups'].each do |supp_group|
+        Chef::Log.info("Trying to add group: " + supp_group)
+        group supp_group do
+          action :create
+          members "#{user}"
+          append true
+        end
       end
     end
 
