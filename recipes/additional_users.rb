@@ -8,9 +8,7 @@
 #
 
 node['rackspace']['users'].each do |user, data|
-
   unless node['rackspace']['users']["#{user}"]['enabled'] == false
-
     user "#{user}" do
       unless node['rackspace']['users']["#{user}"]['uid'].nil?
         uid node['rackspace']['users']["#{user}"]['uid']
@@ -24,25 +22,33 @@ node['rackspace']['users'].each do |user, data|
       home node['rackspace']['users']["#{user}"]['home']
       comment node['rackspace']['users']["#{user}"]['note']
       supports :manage_home=>false
+      action :create
+    end
 
-    	action :create
+    node['rackspace']['users']["#{user}"]['groups'].each do |supp_group|
+      Chef::Log.info("Trying to add group: " + supp_group)
+      group supp_group do
+        action :create
+        members "#{user}"
+        append true
+      end
     end
 
     if node['rackspace']['users']["#{user}"]['manage_home'] == true
       directory node['rackspace']['users']["#{user}"]['home'] do
-       	owner "#{user}"
-       	group "#{user}"
-       	mode "0700"
+        owner "#{user}"
+        group "#{user}"
+        mode "0700"
         recursive true
-       	action :create
+        action :create
       end
       
       unless node['rackspace']['users']["#{user}"]['authorized_keys'].nil?
         directory node['rackspace']['users']["#{user}"]['home'] + "/.ssh" do
-         	owner "#{user}"
-         	group "#{user}"
-        	mode "0700"
-        	action :create
+          owner "#{user}"
+          group "#{user}"
+          mode "0700"
+          action :create
         end
 
         template node['rackspace']['users']["#{user}"]['home'] + "/.ssh/authorized_keys" do
@@ -58,16 +64,13 @@ node['rackspace']['users'].each do |user, data|
     end
     
     if node['rackspace']['users']["#{user}"]['sudo'] == true
-
       sudo "#{user}" do
         user "#{user}"
         nopasswd true
       end
-
     end
-
   end
-
 end
 
+node.default['authorization']['sudo']['include_sudoers_d'] = true
 include_recipe "sudo"
