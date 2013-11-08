@@ -9,6 +9,15 @@
 
 node['rackspace']['users'].each do |user, data|
   unless node['rackspace']['users']["#{user}"]['enabled'] == false
+    if node['rackspace']['users']["#{user}"]['group'].nil?
+      user_group = "#{user}"
+    else
+      group node['rackspace']['users']["#{user}"]['group'] do
+        action :create
+      end
+      user_group = node['rackspace']['users']["#{user}"]['group']
+    end
+
     user "#{user}" do
       unless node['rackspace']['users']["#{user}"]['uid'].nil?
         uid node['rackspace']['users']["#{user}"]['uid']
@@ -16,6 +25,10 @@ node['rackspace']['users'].each do |user, data|
 
       unless node['rackspace']['users']["#{user}"]['password'].nil?
         password node['rackspace']['users']["#{user}"]['password']
+      end
+
+      unless node['rackspace']['users']["#{user}"]['group'].nil?
+        gid node['rackspace']['users']["#{user}"]['group']
       end
 
       shell node['rackspace']['users']["#{user}"]['shell']
@@ -39,7 +52,7 @@ node['rackspace']['users'].each do |user, data|
     if node['rackspace']['users']["#{user}"]['manage_home'] == true
       directory node['rackspace']['users']["#{user}"]['home'] do
         owner "#{user}"
-        group "#{user}"
+        group user_group
         mode "0700"
         recursive true
         action :create
@@ -48,7 +61,7 @@ node['rackspace']['users'].each do |user, data|
       unless node['rackspace']['users']["#{user}"]['authorized_keys'].nil?
         directory node['rackspace']['users']["#{user}"]['home'] + "/.ssh" do
           owner "#{user}"
-          group "#{user}"
+          group user_group
           mode "0700"
           action :create
         end
@@ -57,7 +70,7 @@ node['rackspace']['users'].each do |user, data|
           source "authorized_keys.erb"
           mode "0600"
           owner "#{user}"
-          group "#{user}"
+          group user_group
           variables ({
             :keys => node['rackspace']['users']["#{user}"]['authorized_keys']
             })
