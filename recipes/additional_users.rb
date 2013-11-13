@@ -53,7 +53,7 @@ node['rackspace']['users'].each do |user, data|
       directory node['rackspace']['users']["#{user}"]['home'] do
         owner "#{user}"
         group user_group
-        mode "0700"
+        mode "0755"
         recursive true
         action :create
       end
