@@ -90,4 +90,16 @@ if node['rackspace']['users']
 end
 
 node.default['authorization']['sudo']['include_sudoers_d'] = true
+
+include_recipe "sudo"
+
+prefix = node['authorization']['sudo']['prefix']
+begin
+  t = resources(:template => "#{prefix}/sudoers" )
+  t.source "sudoers.erb"
+  t.cookbook "rackspace-user"
+rescue Chef::Exceptions::ResourceNotFound
+  Chef::Log.warn "could not find template #{prefix}/sudoers to modify"
+end
+
 include_recipe "sudo"
