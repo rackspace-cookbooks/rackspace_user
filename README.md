@@ -3,6 +3,7 @@ The default recipe creates a `rack` user and updates the authorized_keys file.
 
 The additional_users recipe creates users based on a data structure in node["rackspace"]["users"].
 
+```ruby
 For example,  
 node["rackspace"]["users"]["kilroy"] =  
   "enabled" => true,  
@@ -14,7 +15,7 @@ node["rackspace"]["users"]["kilroy"] =
   "authorized_keys" => [  
     "AAAAB3NzaC1yc2EAAAADAQABAAABAQC3vjtkdo1eO9eM22+vTza2+fne0yW4WnCnX3zhvOZY4V3covLXWDQN/X04U7+DIMwYeKMr9JQrd4kwvzXA0o44851Vk4AG7rP/E0982HcZ7ScK+K8W2h73uwV75VgTWzqiyy/FxLVr0Ut41UGb6wTUfTOHqvVgiDuB7Hxum3++MRUlDm7vEjRuMyGQQ2ma8fVFUgwL+5R00+reOJ2/+C2UJcwrKINwu/lBQkD6WBLxfu+Aw4sHI+LRzjO8pSmCletVwIA4yWONWPvKO34cxccmhxcjHTrwgVoUeBLOkP9nUT7MJA5W9fcA+7jt18d+SsGaj4b4u5skShaMAicgfnTF"  
   ]  
-  
+```
   
 # Requirements
 No other cookbooks are required for the base role, minitest-handler is recommended to execute the tests in ./files/default/tests/minitest/
