@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: rackspace-user
+# Cookbook Name:: rackspace_user
 # Recipe:: default
 #
 # Copyright (C) 2013 Rackspace
