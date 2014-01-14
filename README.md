@@ -1,5 +1,5 @@
-# rackspace-user cookbook
-The default recipe creates a `rack` user and updates the authorized_keys file.
+# rackspace_user cookbook
+The default recipe does nothing - rack_user recipe creates a `rack` user and updates the authorized_keys file.
 
 The additional_users recipe creates users based on a data structure in node["rackspace"]["users"].
 
