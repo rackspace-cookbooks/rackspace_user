@@ -91,8 +91,6 @@ end
 
 node.default[:authorization][:sudo:][:include_sudoers_d] = true
 
-include_recipe "rackspace_sudo"
-
 prefix = node[:authorization][:sudo][:prefix]
 begin
   t = resources(:template => "#{prefix}/sudoers" )
