@@ -28,23 +28,21 @@ rackspace_sudo cookbook is required, minitest-handler is recommended to execute 
 
 # Attributes
 
-    node[:rackspace_user][:users] - hash of users, keys are usernames.
+`node[:rackspace_user][:users]` - hash of users, keys are usernames.
+`node[:rackspace_user][:users]["#{user}"]` - user to create  
+`node[:rackspace_user][:users]["#{user}"][:remote_file]` - remote file that contains ssh keys  
+`node[:rackspace_user][:users]["#{user}"][:shell]` - user's shell  
+`node[:rackspace_user][:users]["#{user}"][:home_folder]` - user's home folder  
 
-    node[:rackspace_user][:users]["#{user}"] - user to create  
-    node[:rackspace_user][:users]["#{user}"][:remote_file] - remote file that contains ssh keys  
-    node[:rackspace_user][:users]["#{user}"][:shell] - user's shell  
-    node[:rackspace_user][:users]["#{user}"][:home_folder] - user's home folder  
 
-
-    node[:rackspace_user][:users]["#{user}"][:enabled] - Boolean true/false, determines if the user is actually created.  
-    node[:rackspace_user][:users]["#{user}"][:manage_home] - Boolean true/false, determines if the home directory is created.  
-    node[:rackspace_user][:users]["#{user}"][:sudo] - Boolean true/false, determines if the user gets sudo access.
-    node[:rackspace_user][:users]["#{user}"][:password] - This takes a password hash for the user's login.
-    node[:rackspace_user][:users]["#{user}"][:note] - This fills the user comment field.
-    node[:rackspace_user][:users]["#{user}"][:home] - Sets the user's home directory and creates it.
-    node[:rackspace_user][:users]["#{user}"][:shell] - Sets the user's shell.
-    node[:rackspace_user][:users]["#{user}"][:authorized_keys] - This is an array of available ssh public keys for this user.
-
+`node[:rackspace_user][:users]["#{user}"][:enabled]` - Boolean true/false, determines if the user is actually created.  
+`node[:rackspace_user][:users]["#{user}"][:manage_home]` - Boolean true/false, determines if the home directory is created.  
+`node[:rackspace_user][:users]["#{user}"][:sudo]` - Boolean true/false, determines if the user gets sudo access.
+`node[:rackspace_user][:users]["#{user}"][:password]` - This takes a password hash for the user's login.
+`node[:rackspace_user][:users]["#{user}"][:note]` - This fills the user comment field.
+`node[:rackspace_user][:users]["#{user}"][:home]` - Sets the user's home directory and creates it.
+`node[:rackspace_user][:users]["#{user}"][:shell]` - Sets the user's shell.
+`node[:rackspace_user][:users]["#{user}"][:authorized_keys]` - This is an array of available ssh public keys for this user.
 
 # Recipes
 default.rb - does nothing.
