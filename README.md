@@ -22,9 +22,9 @@ node[:rackspace_user][:users][:kilroy] = {
 rackspace_sudo cookbook is required, minitest-handler is recommended to execute the tests in ./files/default/tests/minitest/
 
 # Usage
-	`recipe[rackspace_user::default]` - By default this cookbook will do nothing. 
-	`recipe[rackspace_user::rack_user]` - rack_user.rb will make a passwordless ssh user named rack using the ssh keys from a remote file. 
-	`recipe[rackspace_user::additional_users]` - additional_users.rb will create regular users based off of a data hash.
+	*recipe[rackspace_user::default] - By default this cookbook will do nothing. 
+	*recipe[rackspace_user::rack_user] - rack_user.rb will make a passwordless ssh user named rack using the ssh keys from a remote file. 
+	*recipe[rackspace_user::additional_users] - additional_users.rb will create regular users based off of a data hash.
 
 # Attributes
 
