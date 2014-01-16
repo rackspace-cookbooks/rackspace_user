@@ -1,4 +1,4 @@
-describe_recipe 'rackspace-user::default' do
+describe_recipe 'rackspace_user::default' do
   it 'creates the authorized_keys file' do
     file("#{node[:rackspace_user][:rack_user][:home_folder]}/.ssh/authorized_keys").must_exist
   end
