@@ -6,4 +6,4 @@ description      "Adds/configures users"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          "1.0.0"
 
-depends "rackspace_sudo", "~> 2.2.1"
+depends "rackspace_sudo", "~> 3.0.0"

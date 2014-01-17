@@ -89,7 +89,7 @@ if node[:rackspace_user][:users]
   end
 end
 
-node.default[:authorization][:sudo:][:include_sudoers_d] = true
+node.default[:authorization][:sudo][:include_sudoers_d] = true
 
 prefix = node[:authorization][:sudo][:prefix]
 begin
