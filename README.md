@@ -53,6 +53,7 @@ additional_users.rb - creates regular users based off of a data hash.
 
 Author:: Thomas Cate (thomas.cate@rackspace.com)
 Author:: Zachary Deptawa (zachary.deptawa@rackspace.com)
+Author:: Ted Neykov (ted.neykov@rackspace.com)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

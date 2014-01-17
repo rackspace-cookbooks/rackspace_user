@@ -1,10 +1,8 @@
-site :opscode
-
 metadata
 
-cookbook "rackspace-sudo", github: "rackspace-cookbooks/sudo"
+cookbook "rackspace_sudo", github: "rackspace-cookbooks/sudo"
 
 group :integration do
-  cookbook "apt", github: "rackspace-cookbooks/rackspace-apt"
+  cookbook "rackspace_apt", github: "rackspace-cookbooks/rackspace_apt"
   cookbook "minitest-handler"
 end
