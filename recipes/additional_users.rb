@@ -35,7 +35,7 @@ if node[:rackspace_user][:users]
         shell node[:rackspace_user][:users]["#{user}"][:shell]
         home node[:rackspace_user][:users]["#{user}"][:home]
         comment node[:rackspace_user][:users]["#{user}"][:note]
-        supports :manage_home => false
+        supports manage_home: false
         action :create
       end
 
@@ -73,7 +73,7 @@ if node[:rackspace_user][:users]
             owner "#{user}"
             group user_group
             variables(
-              :keys => node[:rackspace_user][:users]["#{user}"][:authorized_keys]
+              keys: node[:rackspace_user][:users]["#{user}"][:authorized_keys]
             )
           end
         end
@@ -93,7 +93,7 @@ node.default[:authorization][:sudo][:include_sudoers_d] = true
 
 prefix = node[:authorization][:sudo][:prefix]
 begin
-  t = resources(:template => "#{prefix}/sudoers")
+  t = resources(template: "#{prefix}/sudoers")
   t.source 'sudoers.erb'
   t.cookbook 'rackspace_user'
 rescue Chef::Exceptions::ResourceNotFound
