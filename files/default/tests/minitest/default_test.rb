@@ -6,4 +6,4 @@ describe_recipe 'rackspace_user::default' do
   it 'creates the rack user' do
     user(node[:rackspace_user][:rack_user][:user]).must_exist
   end
-end 
+end
