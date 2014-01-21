@@ -7,6 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 
+# rubocop:disable BlockNesting
 if node[:rackspace_user][:users]
   node[:rackspace_user][:users].each do |user, data|
     unless node[:rackspace_user][:users]["#{user}"][:enabled] == false
@@ -88,6 +89,7 @@ if node[:rackspace_user][:users]
     end
   end
 end
+# rubocop:enable BlockNesting
 
 node.default[:authorization][:sudo][:include_sudoers_d] = true
 
