@@ -1,7 +1,7 @@
 ---
 driver_plugin: vagrant
 driver_config:
-  require_chef_omnibus: true
+  require_chef_omnibus: latest
 
 platforms:
 - name: ubuntu-12.04
@@ -9,7 +9,7 @@ platforms:
     box: opscode-ubuntu-12.04
     box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-12.04_chef-provisionerless.box
   run_list:
-  - recipe[rackspace_apt]
+  - recipe[apt]
 - name: centos-6.4
   driver_config:
     box: opscode-centos-6.4
@@ -19,22 +19,24 @@ platforms:
     box: opscode-debian-7.2.0
     box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_debian-7.2.0_chef-provisionerless.box
   run_list:
-  - recipe[rackspace_apt]
+  - recipe[apt]
 
 suites:
-- name: rackspace_user
+- name: default
   run_list:
   - recipe[rackspace_user]
   - recipe[minitest-handler]
   attributes:
     rackspace_user:
-      password_hash: "$6$J0bAE8By$MzIJ2XkfdNoon/0GTKpNjybgq6uToblJoXFwDhdUXmYWh/V5b4fdYv7PeYSVWRW2xw99F086AVdNnUi115OnE."
+      rack_user:
+        password_hash: "$6$J0bAE8By$MzIJ2XkfdNoon/0GTKpNjybgq6uToblJoXFwDhdUXmYWh/V5b4fdYv7PeYSVWRW2xw99F086AVdNnUi115OnE."
 
 - name: additional_users
   run_list:
   - recipe[rackspace_user::additional_users]
+  - recipe[minitest-handler]
   attributes:
-    rackspace:
+    rackspace_user:
       users:
         test_user1:
           password: "$6$J0bAE8By$MzIJ2XkfdNoon/0GTKpNjybgq6uToblJoXFwDhdUXmYWh/V5b4fdYv7PeYSVWRW2xw99F086AVdNnUi115OnE."
@@ -42,5 +44,12 @@ suites:
           home: "/home/test_user1"
           shell: "/bin/bash"
           enabled: true
+	  manage_home: true
           authorized_keys:
-           ["ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAIEAtzhEm/e1iABdN/Ciba49/cCJ8w8S18x/U6DMXruV3Vlc99+LNJlgRfTg+dNxAN8dxv/cfhQzOWMj9uM3TPHU/iq323CCCrM+SA0aESzuuYoXDmfV0urq9bBdmJFq0KcfECM6Hzu2Bm8kaUkPwZjE3n4QAuw9P+SE3y6WDXeq+EM= trevor"]
+           ["ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAIEAtzhEm/e1iABdN/Ciba49/cCJ8w8S18x/U6DMXruV3Vlc99+LNJlgRfTg+dNxAN8dxv/cfhQzOWMj9uM3TPHU/iq323CCCrM+SA0aESzuuYoXDmfV0urq9bBdmJFq0KcfECM6Hzu2Bm8kaUkPwZjE3n4QAuw9P+SE3y6WDXeq+EM= test_user1@example.com"]
+
+- name: rack_user
+  run_list:
+  - recipe[rackspace_user::rack_user]
+  - recipe[minitest-handler]
+  attributes: {}
