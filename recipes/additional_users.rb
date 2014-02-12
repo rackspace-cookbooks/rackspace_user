@@ -18,6 +18,7 @@ if node['rackspace']['users']
       unless node['rackspace']['users']["#{user}"]['home'].nil?
         directory node['rackspace']['users']["#{user}"]['home'] do
           action :delete
+          recursive true
         end
       end
       
@@ -27,82 +28,82 @@ if node['rackspace']['users']
           action :remove
         end
       end
-    end # END KILLSWITCH
-
-    unless node['rackspace']['users']["#{user}"]['enabled'] == false
-      if node['rackspace']['users']["#{user}"]['group'].nil?
-        user_group = "#{user}"
-      else
-        group node['rackspace']['users']["#{user}"]['group'] do
-          action :create
-        end
-        user_group = node['rackspace']['users']["#{user}"]['group']
-      end
-
-      user "#{user}" do
-        unless node['rackspace']['users']["#{user}"]['uid'].nil?
-          uid node['rackspace']['users']["#{user}"]['uid']
-        end
-
-        unless node['rackspace']['users']["#{user}"]['password'].nil?
-          password node['rackspace']['users']["#{user}"]['password']
-        end
-
-        unless node['rackspace']['users']["#{user}"]['group'].nil?
-          gid node['rackspace']['users']["#{user}"]['group']
-        end
-
-        shell node['rackspace']['users']["#{user}"]['shell']
-        home node['rackspace']['users']["#{user}"]['home']
-        comment node['rackspace']['users']["#{user}"]['note']
-        supports :manage_home=>false
-        action :create
-      end
-
-      unless node['rackspace']['users']["#{user}"]['groups'].nil?
-        node['rackspace']['users']["#{user}"]['groups'].each do |supp_group|
-          Chef::Log.info("Trying to add group: " + supp_group)
-          group supp_group do
-            action :create
-            members "#{user}"
-            append true
-          end
-        end
-      end
-
-      if node['rackspace']['users']["#{user}"]['manage_home'] == true
-        directory node['rackspace']['users']["#{user}"]['home'] do
-          owner "#{user}"
-          group user_group
-          mode "0755"
-          recursive true
-          action :create
-        end
-      
-        unless node['rackspace']['users']["#{user}"]['authorized_keys'].nil?
-          directory node['rackspace']['users']["#{user}"]['home'] + "/.ssh" do
-            owner "#{user}"
-            group user_group
-            mode "0700"
+    else # END KILLSWITCH
+      unless node['rackspace']['users']["#{user}"]['enabled'] == false
+        if node['rackspace']['users']["#{user}"]['group'].nil?
+          user_group = "#{user}"
+        else
+          group node['rackspace']['users']["#{user}"]['group'] do
             action :create
           end
-
-          template node['rackspace']['users']["#{user}"]['home'] + "/.ssh/authorized_keys" do
-            source "authorized_keys.erb"
-            mode "0600"
+          user_group = node['rackspace']['users']["#{user}"]['group']
+        end
+        
+        user "#{user}" do
+          unless node['rackspace']['users']["#{user}"]['uid'].nil?
+            uid node['rackspace']['users']["#{user}"]['uid']
+          end
+          
+          unless node['rackspace']['users']["#{user}"]['password'].nil?
+            password node['rackspace']['users']["#{user}"]['password']
+          end
+          
+          unless node['rackspace']['users']["#{user}"]['group'].nil?
+            gid node['rackspace']['users']["#{user}"]['group']
+          end
+          
+          shell node['rackspace']['users']["#{user}"]['shell']
+          home node['rackspace']['users']["#{user}"]['home']
+          comment node['rackspace']['users']["#{user}"]['note']
+          supports :manage_home=>false
+          action :create
+        end
+        
+        unless node['rackspace']['users']["#{user}"]['groups'].nil?
+          node['rackspace']['users']["#{user}"]['groups'].each do |supp_group|
+            Chef::Log.info("Trying to add group: " + supp_group)
+            group supp_group do
+              action :create
+              members "#{user}"
+              append true
+            end
+          end
+        end
+        
+        if node['rackspace']['users']["#{user}"]['manage_home'] == true
+          directory node['rackspace']['users']["#{user}"]['home'] do
             owner "#{user}"
             group user_group
-            variables ({
+            mode "0755"
+            recursive true
+            action :create
+          end
+          
+          unless node['rackspace']['users']["#{user}"]['authorized_keys'].nil?
+            directory node['rackspace']['users']["#{user}"]['home'] + "/.ssh" do
+              owner "#{user}"
+              group user_group
+              mode "0700"
+              action :create
+            end
+            
+            template node['rackspace']['users']["#{user}"]['home'] + "/.ssh/authorized_keys" do
+              source "authorized_keys.erb"
+              mode "0600"
+              owner "#{user}"
+              group user_group
+              variables ({
               :keys => node['rackspace']['users']["#{user}"]['authorized_keys']
-              })
-          end          
-        end        
-      end
-      
-      if node['rackspace']['users']["#{user}"]['sudo'] == true
-        sudo "#{user}" do
-          user "#{user}"
-          nopasswd true
+                         })
+            end          
+          end        
+        end
+        
+        if node['rackspace']['users']["#{user}"]['sudo'] == true
+          sudo "#{user}" do
+            user "#{user}"
+            nopasswd true
+          end
         end
       end
     end
