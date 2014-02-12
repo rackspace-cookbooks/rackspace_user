@@ -9,6 +9,26 @@
 
 if node['rackspace']['users']
   node['rackspace']['users'].each do |user, data|
+    # This is an overarching kill switch that overrides enable
+    if node['rackspace']['users']["#{user}"]['scrub'] == true
+      user "#{user}" do
+        action :remove
+      end
+
+      unless node['rackspace']['users']["#{user}"]['home'].nil?
+        directory node['rackspace']['users']["#{user}"]['home'] do
+          action :delete
+        end
+      end
+      
+      if node['rackspace']['users']["#{user}"]['sudo'] == true
+        sudo "#{user}" do
+          user "#{user}"
+          action :remove
+        end
+      end
+    end # END KILLSWITCH
+
     unless node['rackspace']['users']["#{user}"]['enabled'] == false
       if node['rackspace']['users']["#{user}"]['group'].nil?
         user_group = "#{user}"
