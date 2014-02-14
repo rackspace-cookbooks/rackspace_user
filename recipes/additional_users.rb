@@ -101,7 +101,7 @@ if node['rackspace_user']['users']
         end
 
         if node['rackspace_user']['users'][user]['sudo'] == true
-          sudo user do
+          rackspace_sudo user do
             user user
             nopasswd true
           end
@@ -112,15 +112,15 @@ if node['rackspace_user']['users']
 end
 # rubocop:enable BlockNesting
 
-node.default['authorization']['sudo']['include_sudoers_d'] = true
+#node.default['authorization']['sudo']['include_sudoers_d'] = true
 
-prefix = node['authorization']['sudo']['prefix']
-begin
-  t = resources(template: "#{prefix}/sudoers")
-  t.source'sudoers.erb'
-  t.cookbook 'rackspace_user'
-rescue Chef::Exceptions::ResourceNotFound
-  Chef::Log.warn "could not find template #{prefix}/sudoers to modify"
-end
+#prefix = node['authorization']['sudo']['prefix']
+#begin
+#  t = resources(template: "#{prefix}/sudoers")
+#  t.source'sudoers.erb'
+#  t.cookbook 'rackspace_user'
+#rescue Chef::Exceptions::ResourceNotFound
+#  Chef::Log.warn "could not find template #{prefix}/sudoers to modify"
+#end
 
-include_recipe 'rackspace_sudo'
+#include_recipe 'rackspace_sudo'
