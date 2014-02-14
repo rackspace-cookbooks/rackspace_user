@@ -27,11 +27,7 @@ suites:
 - name: default
   run_list:
   - recipe[rackspace_user]
-  - recipe[minitest-handler]
-  attributes:
-    rackspace_user:
-      rack_user:
-        password_hash: "$6$J0bAE8By$MzIJ2XkfdNoon/0GTKpNjybgq6uToblJoXFwDhdUXmYWh/V5b4fdYv7PeYSVWRW2xw99F086AVdNnUi115OnE."
+  attributes: {}
 
 - name: additional_users
   run_list:
@@ -54,4 +50,7 @@ suites:
   run_list:
   - recipe[rackspace_user::rack_user]
   - recipe[minitest-handler]
-  attributes: {}
+  attributes:
+    rackspace_user:
+      rack_user:
+        password_hash: "$6$J0bAE8By$MzIJ2XkfdNoon/0GTKpNjybgq6uToblJoXFwDhdUXmYWh/V5b4fdYv7PeYSVWRW2xw99F086AVdNnUi115OnE."

@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: rackspace_user_user
+# Cookbook Name:: rackspace_user
 # Recipe:: additional_users
 #
 # Copyright (C) 2013 Rackspace
@@ -8,8 +8,8 @@
 #
 
 # rubocop:disable BlockNesting
-if node['rackspace_user_user']['users']
-  node['rackspace_user_user']['users'].each do |user, data|
+if node['rackspace_user']['users']
+  node['rackspace_user']['users'].each do |user, data|
     # This is an overarching kill switch that overrides enable
     if node['rackspace_user']['users'][user]['scrub'] == true
       user user do
