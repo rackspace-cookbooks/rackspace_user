@@ -17,7 +17,7 @@ describe 'rackspace_user::rack_user' do
     it 'creates the rack user home directory' do
       expect(chef_run).to create_directory('/home/rack').with(
         user:  'rack',
-        group: 'rack',
+        group: 'rack'
       )
     end
 
