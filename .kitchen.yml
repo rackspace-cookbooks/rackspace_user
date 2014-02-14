@@ -26,7 +26,7 @@ platforms:
 suites:
 - name: default
   run_list:
-  - recipe[rackspace-user]
+  - recipe[rackspace_user]
   - recipe[minitest-handler]
   attributes:
     rackspace_user:
