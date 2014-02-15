@@ -114,12 +114,12 @@ if node['rackspace_user']['users']
               nopasswd false
             end
           end
-        else 
+        else
           rackspace_sudo user do
             user user
             action :remove
           end
-        end    
+        end
 
       end
     end
