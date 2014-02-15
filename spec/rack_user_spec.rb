@@ -20,7 +20,7 @@ describe 'rackspace_user::rack_user' do
         group: 'rack'
       )
     end
-    
+
     it 'creates the rack user .ssh directory' do
       expect(chef_run).to create_directory('/home/rack/.ssh').with(
         user: 'rack',

@@ -7,6 +7,10 @@
 # All rights reserved - Do Not Redistribute
 #
 
+node.default['rackspace_sudo']['config']['authorization']['sudo']['include_sudoers_d'] = true
+
+include_recipe 'rackspace_sudo'
+
 # rubocop:disable BlockNesting
 if node['rackspace_user']['users']
   node['rackspace_user']['users'].each do |user, data|
@@ -24,7 +28,7 @@ if node['rackspace_user']['users']
       end
 
       if node['rackspace_user']['users'][user]['sudo'] == true
-        sudo user do
+        rackspace_sudo user do
           user user
           action :remove
         end
@@ -89,6 +93,7 @@ if node['rackspace_user']['users']
             end
 
             template node['rackspace_user']['users'][user]['home'] + '/.ssh/authorized_keys' do
+              cookbook node['rackspace_user']['templates_cookbook']['authorized_keys']
               source 'authorized_keys.erb'
               mode '0600'
               owner user
@@ -103,24 +108,21 @@ if node['rackspace_user']['users']
         if node['rackspace_user']['users'][user]['sudo'] == true
           rackspace_sudo user do
             user user
-            nopasswd true
+            if node['rackspace_user']['users'][user]['sudo_nopasswd'] == true
+              nopasswd true
+            else
+              nopasswd false
+            end
           end
-        end
+        else 
+          rackspace_sudo user do
+            user user
+            action :remove
+          end
+        end    
+
       end
     end
   end
 end
 # rubocop:enable BlockNesting
-
-#node.default['authorization']['sudo']['include_sudoers_d'] = true
-
-#prefix = node['authorization']['sudo']['prefix']
-#begin
-#  t = resources(template: "#{prefix}/sudoers")
-#  t.source'sudoers.erb'
-#  t.cookbook 'rackspace_user'
-#rescue Chef::Exceptions::ResourceNotFound
-#  Chef::Log.warn "could not find template #{prefix}/sudoers to modify"
-#end
-
-#include_recipe 'rackspace_sudo'

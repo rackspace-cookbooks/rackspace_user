@@ -12,22 +12,22 @@ platforms:
     box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-12.04_chef-provisionerless.box
   run_list:
   - recipe[rackspace_apt]
-- name: centos-6.4
-  driver_config:
-    box: opscode-centos-6.4
-    box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_centos-6.4_chef-provisionerless.box
-- name: debian-7.2.0
-  driver_config:
-    box: opscode-debian-7.2.0
-    box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_debian-7.2.0_chef-provisionerless.box
-  run_list:
-  - recipe[rackspace_apt]
+#- name: centos-6.4
+#  driver_config:
+#    box: opscode-centos-6.4
+#    box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_centos-6.4_chef-provisionerless.box
+#- name: debian-7.2.0
+#  driver_config:
+#    box: opscode-debian-7.2.0
+#    box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_debian-7.2.0_chef-provisionerless.box
+#  run_list:
+#  - recipe[rackspace_apt]
 
 suites:
-- name: default
-  run_list:
-  - recipe[rackspace_user]
-  attributes: {}
+#- name: default
+#  run_list:
+#  - recipe[rackspace_user]
+#  attributes: {}
 
 - name: additional_users
   run_list:
@@ -40,7 +40,6 @@ suites:
           password: "$6$J0bAE8By$MzIJ2XkfdNoon/0GTKpNjybgq6uToblJoXFwDhdUXmYWh/V5b4fdYv7PeYSVWRW2xw99F086AVdNnUi115OnE."
           note: "Test User 1"
           home: "/home/test_user1"
-          shell: "/bin/bash"
           enabled: true
           manage_home: true
           authorized_keys: 
