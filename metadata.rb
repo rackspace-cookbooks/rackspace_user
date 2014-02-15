@@ -8,7 +8,7 @@ version          '1.0.0'
 
 recipe 'rackspace_user', 'Configures users'
 
-depends 'rackspace_sudo', '~> 3.0'
+depends 'rackspace_sudo', '~> 3.1'
 
 %w{redhat centos ubuntu debian}.each do |os|
   supports os

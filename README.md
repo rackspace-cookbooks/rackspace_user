@@ -7,7 +7,9 @@ For example,
 ```ruby
 node['rackspace_user']['users']['kilroy'] = {
   "enabled" => true,  
-  "sudo" => "passwordless",  
+  "sudo" => "true",  
+  "sudo_nopasswd" => "true",  
+  "manage_home" => "true",  
   "password" => "$6$passwordhashasdf/.asdf./asdf./awe/awletr.lj/sldj",  
   "note" => "Kilroy was here",  
   "home" => "/home/kilroy",  
@@ -37,7 +39,8 @@ rackspace_sudo cookbook is required, minitest-handler is recommended to execute 
 
 `node['rackspace_user']['users']["#{user}"]['enabled']` - Boolean true/false, determines if the user is actually created.  
 `node['rackspace_user']['users']["#{user}"]['manage_home']` - Boolean true/false, determines if the home directory is created.  
-`node['rackspace_user']['users']["#{user}"]['sudo']` - Boolean true/false, determines if the user gets sudo access.
+`node['rackspace_user']['users']["#{user}"]['sudo']` - Boolean true/false, true enables sudo, false/nil disables sudo.
+`node['rackspace_user']['users']["#{user}"]['sudo_nopasswd']` - Boolean true/false, if sudo == true and sudo_nopasswd == true, passwordless sudo is enabled. false/nil disables passwordless sudo.
 `node['rackspace_user']['users']["#{user}"]['password']` - This takes a password hash for the user's login.
 `node['rackspace_user']['users']["#{user}"]['note']` - This fills the user comment field.
 `node['rackspace_user']['users']["#{user}"]['home']` - Sets the user's home directory and creates it.
@@ -51,10 +54,11 @@ additional_users.rb - creates regular users based off of a data hash.
 
 # License and Authors
 
-Author:: Thomas Cate (thomas.cate@rackspace.com)
-Author:: Zachary Deptawa (zachary.deptawa@rackspace.com)
-Author:: Ted Neykov (ted.neykov@rackspace.com)
+- Author:: Thomas Cate (thomas.cate@rackspace.com)
+- Author:: Zachary Deptawa (zachary.deptawa@rackspace.com)
+- Author:: Ted Neykov (ted.neykov@rackspace.com)
 
+```text
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -66,3 +70,4 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+```
