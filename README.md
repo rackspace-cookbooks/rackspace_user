@@ -48,9 +48,9 @@ rackspace_sudo cookbook is required, minitest-handler is recommended to execute 
 `node['rackspace_user']['users']["#{user}"]['authorized_keys']` - This is an array of available ssh public keys for this user.
 
 # Recipes
-default.rb - does nothing.
-rack_user.rb - makes a passwordless ssh user named rack using the ssh keys from a remote file.
-additional_users.rb - creates regular users based off of a data hash.
+- default.rb - does nothing.
+- rack_user.rb - makes a passwordless ssh user named rack using the ssh keys from a remote file.
+- additional_users.rb - creates regular users based off of a data hash.
 
 # License and Authors
 
