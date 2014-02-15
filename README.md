@@ -53,6 +53,14 @@ rackspace_sudo cookbook is required, minitest-handler is recommended to execute 
 - rack_user.rb - makes a passwordless ssh user named rack using the ssh keys from a remote file.
 - additional_users.rb - creates regular users based off of a data hash.
 
+# Contributing
+
+* See the guide [here](https://github.com/rackspace-cookbooks/contributing/blob/master/CONTRIBUTING.md)
+
+# Testing
+
+* See the guide [here](https://github.com/rackspace-cookbooks/contributing/blob/master/CONTRIBUTING.md)
+
 # License and Authors
 
 - Author:: Thomas Cate (thomas.cate@rackspace.com)
