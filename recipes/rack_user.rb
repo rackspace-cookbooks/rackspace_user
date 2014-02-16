@@ -42,6 +42,6 @@ end
 remote_file "#{node['rackspace_user']['rack_user']['home_folder']}/.ssh/authorized_keys" do
   owner node['rackspace_user']['rack_user']['user']
   group node['rackspace_user']['rack_user']['user']
-  source 'https://raw.github.com/rackops/authorized_keys/master/authorized_keys'
+  source node['rackspace_user']['rack_user']['remote_file']
   action :create
 end
