@@ -1,126 +1,138 @@
 #
-# Cookbook Name:: rackspace-user
+# Cookbook Name:: rackspace_user
 # Recipe:: additional_users
 #
-# Copyright (C) 2013 Rackspace
-# 
-# All rights reserved - Do Not Redistribute
+# Copyright (C) 2013-2014, Rackspace, US Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 #
 
-if node['rackspace']['users']
-  node['rackspace']['users'].each do |user, data|
+node.default['rackspace_sudo']['config']['authorization']['sudo']['include_sudoers_d'] = true
+
+include_recipe 'rackspace_sudo'
+
+# rubocop:disable BlockNesting
+if node['rackspace_user']['users']
+  node['rackspace_user']['users'].each do |user, data|
     # This is an overarching kill switch that overrides enable
-    if node['rackspace']['users']["#{user}"]['scrub'] == true
-      user "#{user}" do
+    if node['rackspace_user']['users'][user]['scrub'] == true
+      user user do
         action :remove
       end
 
-      unless node['rackspace']['users']["#{user}"]['home'].nil?
-        directory node['rackspace']['users']["#{user}"]['home'] do
+      unless node['rackspace_user']['users'][user]['home'].nil?
+        directory node['rackspace_user']['users'][user]['home'] do
           action :delete
           recursive true
         end
       end
-      
-      if node['rackspace']['users']["#{user}"]['sudo'] == true
-        sudo "#{user}" do
-          user "#{user}"
+
+      if node['rackspace_user']['users'][user]['sudo'] == true
+        rackspace_sudo user do
+          user user
           action :remove
         end
       end
     else # END KILLSWITCH
-      unless node['rackspace']['users']["#{user}"]['enabled'] == false
-        if node['rackspace']['users']["#{user}"]['group'].nil?
-          user_group = "#{user}"
+      unless node['rackspace_user']['users'][user]['enabled'] == false
+        if node['rackspace_user']['users'][user]['group'].nil?
+          user_group = user
         else
-          group node['rackspace']['users']["#{user}"]['group'] do
+          group node['rackspace_user']['users'][user]['group'] do
             action :create
           end
-          user_group = node['rackspace']['users']["#{user}"]['group']
+          user_group = node['rackspace_user']['users'][user]['group']
         end
-        
-        user "#{user}" do
-          unless node['rackspace']['users']["#{user}"]['uid'].nil?
-            uid node['rackspace']['users']["#{user}"]['uid']
+
+        user user do
+          unless node['rackspace_user']['users'][user]['uid'].nil?
+            uid node['rackspace_user']['users'][user]['uid']
           end
-          
-          unless node['rackspace']['users']["#{user}"]['password'].nil?
-            password node['rackspace']['users']["#{user}"]['password']
+
+          unless node['rackspace_user']['users'][user]['password'].nil?
+            password node['rackspace_user']['users'][user]['password']
           end
-          
-          unless node['rackspace']['users']["#{user}"]['group'].nil?
-            gid node['rackspace']['users']["#{user}"]['group']
+
+          unless node['rackspace_user']['users'][user]['group'].nil?
+            gid node['rackspace_user']['users'][user]['group']
           end
-          
-          shell node['rackspace']['users']["#{user}"]['shell']
-          home node['rackspace']['users']["#{user}"]['home']
-          comment node['rackspace']['users']["#{user}"]['note']
-          supports :manage_home=>false
+
+          shell node['rackspace_user']['users'][user]['shell']
+          home node['rackspace_user']['users'][user]['home']
+          comment node['rackspace_user']['users'][user]['note']
+          supports manage_home: false
           action :create
         end
-        
-        unless node['rackspace']['users']["#{user}"]['groups'].nil?
-          node['rackspace']['users']["#{user}"]['groups'].each do |supp_group|
-            Chef::Log.info("Trying to add group: " + supp_group)
+
+        unless node['rackspace_user']['users'][user]['groups'].nil?
+          node['rackspace_user']['users'][user]['groups'].each do |supp_group|
+            Chef::Log.info('Trying to add group: ' + supp_group)
             group supp_group do
               action :create
-              members "#{user}"
+              members user
               append true
             end
           end
         end
-        
-        if node['rackspace']['users']["#{user}"]['manage_home'] == true
-          directory node['rackspace']['users']["#{user}"]['home'] do
-            owner "#{user}"
+
+        if node['rackspace_user']['users'][user]['manage_home'] == true
+          directory node['rackspace_user']['users'][user]['home'] do
+            owner user
             group user_group
-            mode "0755"
+            mode '0755'
             recursive true
             action :create
           end
-          
-          unless node['rackspace']['users']["#{user}"]['authorized_keys'].nil?
-            directory node['rackspace']['users']["#{user}"]['home'] + "/.ssh" do
-              owner "#{user}"
+
+          unless node['rackspace_user']['users'][user]['authorized_keys'].nil?
+            directory node['rackspace_user']['users'][user]['home'] + '/.ssh' do
+              owner user
               group user_group
-              mode "0700"
+              mode '0700'
               action :create
             end
-            
-            template node['rackspace']['users']["#{user}"]['home'] + "/.ssh/authorized_keys" do
-              source "authorized_keys.erb"
-              mode "0600"
-              owner "#{user}"
+
+            template node['rackspace_user']['users'][user]['home'] + '/.ssh/authorized_keys' do
+              cookbook node['rackspace_user']['templates_cookbook']['authorized_keys']
+              source 'authorized_keys.erb'
+              mode '0600'
+              owner user
               group user_group
-              variables ({
-              :keys => node['rackspace']['users']["#{user}"]['authorized_keys']
-                         })
-            end          
-          end        
-        end
-        
-        if node['rackspace']['users']["#{user}"]['sudo'] == true
-          sudo "#{user}" do
-            user "#{user}"
-            nopasswd true
+              variables(
+                keys: node['rackspace_user']['users'][user]['authorized_keys']
+              )
+            end
           end
         end
+
+        if node['rackspace_user']['users'][user]['sudo'] == true
+          rackspace_sudo user do
+            user user
+            if node['rackspace_user']['users'][user]['sudo_nopasswd'] == true
+              nopasswd true
+            else
+              nopasswd false
+            end
+          end
+        else
+          rackspace_sudo user do
+            user user
+            action :remove
+          end
+        end
+
       end
     end
   end
 end
-
-node.default['authorization']['sudo']['include_sudoers_d'] = true
-
-include_recipe "sudo"
-
-prefix = node['authorization']['sudo']['prefix']
-begin
-  t = resources(:template => "#{prefix}/sudoers" )
-  t.source "sudoers.erb"
-  t.cookbook "rackspace-user"
-rescue Chef::Exceptions::ResourceNotFound
-  Chef::Log.warn "could not find template #{prefix}/sudoers to modify"
-end
-
-include_recipe "sudo"
+# rubocop:enable BlockNesting

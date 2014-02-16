@@ -1,37 +1,18 @@
 #
-# Cookbook Name:: rackspace-user
+# Cookbook Name:: rackspace_user
 # Recipe:: default
 #
-# Copyright (C) 2013 Rackspace
-# 
-# All rights reserved - Do Not Redistribute
+# Copyright (C) 2013-2014 Rackspace, US Inc.
 #
-
-user node['rackspace-user']['user'] do
-  home node['rackspace-user']['home_folder']
-  shell node['rackspace-user']['shell']
-  if node['rackspace-user'].has_key? "password_hash"
-    password node['rackspace-user']['password_hash']
-  end
-end
-
-directory node['rackspace-user']['home_folder'] do
-  owner node['rackspace-user']['user']
-  group node['rackspace-user']['user']
-  mode "0700"
-  action :create
-end
-
-directory "#{node['rackspace-user']['home_folder']}/.ssh" do
-  owner node['rackspace-user']['user']
-  group node['rackspace-user']['user']
-  mode  "0700"
-  action :create
-end
-
-remote_file "#{node['rackspace-user']['home_folder']}/.ssh/authorized_keys" do
-  owner node['rackspace-user']['user']
-  group node['rackspace-user']['user']
-  source "https://raw.github.com/rackops/authorized_keys/master/authorized_keys"
-  action :create
-end
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#

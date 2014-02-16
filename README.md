@@ -1,13 +1,15 @@
-# rackspace-user cookbook
-The default recipe creates a `rack` user and updates the authorized_keys file.
+# rackspace_user cookbook
+`recipe[rackspace_user::default]` recipe does nothing - `recipe[rackspace_user::rack_user]` recipe creates a `rack` user and updates the authorized_keys file.
 
-The additional_users recipe creates users based on a data structure in node["rackspace"]["users"].
+The additional_users recipe creates users based on a data structure in `node['rackspace_user']['users']`.
 
-```ruby
 For example,  
-node["rackspace"]["users"]["kilroy"] = {
+```ruby
+node['rackspace_user']['users']['kilroy'] = {
   "enabled" => true,  
-  "sudo" => "passwordless",  
+  "sudo" => "true",  
+  "sudo_nopasswd" => "true",  
+  "manage_home" => "true",  
   "password" => "$6$passwordhashasdf/.asdf./asdf./awe/awletr.lj/sldj",  
   "note" => "Kilroy was here",  
   "home" => "/home/kilroy",  
@@ -19,38 +21,54 @@ node["rackspace"]["users"]["kilroy"] = {
 ```
   
 # Requirements
-No other cookbooks are required for the base role, minitest-handler is recommended to execute the tests in ./files/default/tests/minitest/
+rackspace_sudo cookbook is required, minitest-handler is recommended to execute the tests in ./files/default/tests/minitest/
 
 # Usage
-By default this will make a passwordless ssh user named rack using the ssh keys from a remote file. All of this can be modified through attributes. 
 
-The additional_users recipe allows you to create regular users based off of a data hash.
+- recipe[rackspace_user::default] - By default this cookbook will do nothing. 
+- recipe[rackspace_user::rack_user] - rack_user.rb will make a passwordless ssh user named rack using the ssh keys from a remote file. 
+- recipe[rackspace_user::additional_users] - additional_users.rb will create regular users based off of a data hash.
 
 # Attributes
 
-    node["rackspace-user"]["user"] user to create  
-    node["rackspace-user"]["remote_file"] remote file that contains ssh keys  
-    node["rackspace-user"]["shell"] users shell  
-    node["rackspace-user"]["home_folder"] users home folder  
+`node['rackspace_user']['users']` - hash of users, keys are usernames.
+`node['rackspace_user']['users']["#{user}"]` - user to create  
+`node['rackspace_user']['users']["#{user}"]['remote_file']` - remote file that contains ssh keys  
+`node['rackspace_user']['users']["#{user}"]['shell']` - user's shell  
+`node['rackspace_user']['users']["#{user}"]['home_folder']` - user's home folder  
 
 
-    node["rackspace"]["users"] hash of users, keys are usernames.
-    enabled: Boolean true/false, determines if the user is actually created.  
-    manage_home: Boolean true/false, determines if the home directory is created.  
-    sudo: Boolean true/false, determines if they get sudo access.
-    password: This takes a password hash for the users login.
-    note: This fills the user comment field.
-    home: Sets the users home directory and creates it.
-    shell: Sets the users shell.
-    authorized_keys: This is an array of available ssh public keys for this user.
-
+`node['rackspace_user']['users']["#{user}"]['enabled']` - Boolean true/false, determines if the user is actually created.  
+`node['rackspace_user']['users']["#{user}"]['manage_home']` - Boolean true/false, determines if the home directory is created.  
+`node['rackspace_user']['users']["#{user}"]['sudo']` - Boolean true/false, true enables sudo, false/nil disables sudo.
+`node['rackspace_user']['users']["#{user}"]['sudo_nopasswd']` - Boolean true/false, if sudo == true and sudo_nopasswd == true, passwordless sudo is enabled. false/nil disables passwordless sudo.
+`node['rackspace_user']['users']["#{user}"]['password']` - This takes a password hash for the user's login.
+`node['rackspace_user']['users']["#{user}"]['note']` - This fills the user comment field.
+`node['rackspace_user']['users']["#{user}"]['home']` - Sets the user's home directory and creates it.
+`node['rackspace_user']['users']["#{user}"]['shell']` - Sets the user's shell.
+`node['rackspace_user']['users']["#{user}"]['authorized_keys']` - This is an array of available ssh public keys for this user.
 
 # Recipes
-default.rb, creates user and pulls in key file
+- default.rb - does nothing.
+- rack_user.rb - makes a passwordless ssh user named rack using the ssh keys from a remote file.
+- additional_users.rb - creates regular users based off of a data hash.
+
+# Contributing
+
+* See the guide [here](https://github.com/rackspace-cookbooks/contributing/blob/master/CONTRIBUTING.md)
+
+# Testing
+
+* See the guide [here](https://github.com/rackspace-cookbooks/contributing/blob/master/CONTRIBUTING.md)
 
 # License and Authors
 
-Author:: Thomas Cate (thomas.cate@rackspace.com)
+- Author:: Thomas Cate (thomas.cate@rackspace.com)
+- Author:: Zachary Deptawa (zachary.deptawa@rackspace.com)
+- Author:: Ted Neykov (ted.neykov@rackspace.com)
+
+```text
+Copyright 2014, Rackspace, US Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -63,3 +81,4 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+```
