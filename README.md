@@ -7,9 +7,9 @@ For example,
 ```ruby
 node['rackspace_user']['users']['kilroy'] = {
   "enabled" => true,  
-  "sudo" => "true",  
-  "sudo_nopasswd" => "true",  
-  "manage_home" => "true",  
+  "sudo" => true,  
+  "sudo_nopasswd" => true,  
+  "manage_home" => true,  
   "password" => "$6$passwordhashasdf/.asdf./asdf./awe/awletr.lj/sldj",  
   "note" => "Kilroy was here",  
   "home" => "/home/kilroy",  
